@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="wrap_content"
-                                   android:layout_height="wrap_content" app:cardCornerRadius="8dp"
-                                   app:cardBackgroundColor="#A7FFEB" android:background="#A7FFEB">
+<FrameLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
+    <androidx.cardview.widget.CardView android:layout_width="wrap_content"
+                                       android:layout_height="wrap_content" app:cardCornerRadius="8dp"
+                                       app:cardBackgroundColor="#A7FFEB" android:background="#A7FFEB"
+                                       android:layout_marginTop="2dp"
+                                       android:layout_marginLeft="8dp"
+                                       android:layout_marginRight="8dp" android:id="@+id/root_card">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView
-                android:text="Mensagem aqui"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/message_textview" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp" android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
-        <TextView
-                android:text="19:40"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/moment_textview"
-                app:layout_constraintTop_toBottomOf="@+id/message_textview" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+            <TextView
+                    android:text="Mensagem aqui"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/message_textview" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp" android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+            <TextView
+                    android:text="19:40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/moment_textview"
+                    app:layout_constraintTop_toBottomOf="@+id/message_textview"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
