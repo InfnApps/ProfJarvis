@@ -1,4 +1,4 @@
-package br.edu.infnet.professorjarvis.question
+package br.edu.infnet.professorjarvis.chat
 
 
 import android.os.Bundle

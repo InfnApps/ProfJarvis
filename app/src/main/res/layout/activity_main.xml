@@ -8,7 +8,7 @@
         tools:context=".MainActivity">
     <fragment
             android:layout_width="0dp"
-            android:layout_height="0dp" android:name="br.edu.infnet.professorjarvis.question.ChatFragment"
+            android:layout_height="0dp" android:name="br.edu.infnet.professorjarvis.chat.ChatFragment"
             android:id="@+id/fragment"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
