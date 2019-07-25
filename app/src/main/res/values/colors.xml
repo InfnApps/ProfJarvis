@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="grayDetail">#DCDCDC</color>
+
+    <color name="userMessageBackground">#FFE57F</color>
+    <color name="jarvisMessageBackground">#A7FFEB</color>
 </resources>
