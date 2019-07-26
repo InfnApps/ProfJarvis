@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.edu.infnet.professorjarvis.R
 import br.edu.infnet.professorjarvis.chat.model.ChatMessage
 import kotlinx.android.synthetic.main.fragment_chat.*
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,10 +43,11 @@ class ChatFragment : Fragment() {
         setUpListeners()
         setUpRecyclerView()
         subscribe()
+        val timestamp = Date().time
         chatViewModel.messages.value = listOf<ChatMessage>(
-            ChatMessage("O rato roeu a roupa do rei de Roma", "19:49"),
-            ChatMessage("abacaxi", "21:20", true),
-            ChatMessage("Há vida em Marte?", "21:29")
+            ChatMessage("O rato roeu a roupa do rei de Roma", timestamp),
+            ChatMessage("abacaxi", timestamp, true),
+            ChatMessage("Há vida em Marte?", timestamp)
         )
     }
 
@@ -54,7 +56,7 @@ class ChatFragment : Fragment() {
             val message = chat_edittext.text.toString()
             val oldMessages = chatViewModel.messages.value
             chatViewModel.messages.value = oldMessages?.plus(
-                            ChatMessage(message, "22:43", true))
+                            ChatMessage(message, Date().time, true))
         }
     }
 
