@@ -15,10 +15,15 @@ import br.edu.infnet.professorjarvis.commom.jarvisMessageBackground
 import br.edu.infnet.professorjarvis.commom.userMessageBackground
 import kotlinx.android.synthetic.main.message_card.view.*
 
-class MessageAdapter(val items:MutableList<ChatMessage> = mutableListOf())
+class MessageAdapter(var items:List<ChatMessage> = mutableListOf())
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount() = items.size
+
+    fun setData(newMessages: List<ChatMessage>){
+        items = newMessages
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemView = LayoutInflater
