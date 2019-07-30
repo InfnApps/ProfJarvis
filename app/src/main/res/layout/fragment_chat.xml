@@ -22,8 +22,13 @@
 
         <EditText
                 android:layout_width="0dp"
-                android:layout_height="32dp"
+                android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:maxLines="5"
                 android:gravity="start|top"
                 android:ems="10"
                 android:id="@+id/chat_edittext"

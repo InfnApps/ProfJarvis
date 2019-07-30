@@ -44,16 +44,21 @@ class ChatFragment : Fragment() {
         setUpRecyclerView()
         subscribe()
         val timestamp = Date().time
-        chatViewModel.messages.value = listOf<ChatMessage>(
-            ChatMessage("O rato roeu a roupa do rei de Roma", timestamp),
-            ChatMessage("abacaxi", timestamp, true),
-            ChatMessage("Há vida em Marte?", timestamp)
-        )
+
+        if (chatViewModel.messages.value == null){
+            chatViewModel.messages.value = listOf<ChatMessage>(
+                ChatMessage("O rato roeu a roupa do rei de Roma", timestamp),
+                ChatMessage("abacaxi", timestamp, true),
+                ChatMessage("Há vida em Marte?", timestamp)
+            )
+        }
     }
 
     private fun setUpListeners(){
         send_message_button.setOnClickListener {
             val message = chat_edittext.text.toString()
+            // limpa o campo de mensagens
+            chat_edittext.setText("")
             val oldMessages = chatViewModel.messages.value
             chatViewModel.messages.value = oldMessages?.plus(
                             ChatMessage(message, Date().time, true))
