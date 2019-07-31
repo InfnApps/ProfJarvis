@@ -1,6 +1,8 @@
 package br.edu.infnet.professorjarvis.chat
 
 
+import android.content.Context
+import android.os.AsyncTask
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.edu.infnet.professorjarvis.R
 import br.edu.infnet.professorjarvis.chat.model.ChatMessage
 import kotlinx.android.synthetic.main.fragment_chat.*
+import java.nio.charset.MalformedInputException
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,11 +49,9 @@ class ChatFragment : Fragment() {
         val timestamp = Date().time
 
         if (chatViewModel.messages.value == null){
-            chatViewModel.messages.value = listOf<ChatMessage>(
-                ChatMessage("O rato roeu a roupa do rei de Roma", timestamp),
-                ChatMessage("abacaxi", timestamp, true),
-                ChatMessage("Há vida em Marte?", timestamp)
-            )
+            // carrega mensagens do arquivo
+            //chatViewModel.messages.value = loadMessages(BACKUP_FILENAME)
+            LoadMessagesTask().execute(BACKUP_FILENAME, "dsd", "dsdsd", "ddds")
         }
     }
 
@@ -79,5 +80,79 @@ class ChatFragment : Fragment() {
         })
     }
 
+    override fun onStop() {
+        super.onStop()
+        // armazena um backup das mensagens
+        saveMessages()
+    }
+
+
+    // Output para escrever
+    private fun saveMessages(){
+        //fos: FileOutputStream
+        val messages = chatViewModel.messages.value
+        if (messages != null && messages.size > 0) {
+            context?.openFileOutput(BACKUP_FILENAME, Context.MODE_PRIVATE).use { fos ->
+                fos?.bufferedWriter().use { writer ->
+
+                    messages.forEach { msg ->
+                        writer?.appendln("#\n$msg")
+                    }
+                }
+            }
+        }
+    }
+
+    // Input para ler
+    private fun loadMessages(filename: String): List<ChatMessage>{
+        val messagesList = mutableListOf<ChatMessage>()
+        context?.let{
+            it.openFileInput(filename).use {fis->
+                fis.bufferedReader().use {reader->
+                    val lines  = reader.readLines()
+                    var index = 0
+                    while (index < lines.size){
+                        if (lines[index++] == MESSAGE_DIVIDER){
+                            val text = lines[index++]
+                            val timestamp = lines[index++].toLong()
+                            val fromUser = lines[index++].toBoolean()
+                            messagesList.add(ChatMessage(text, timestamp, fromUser))
+                        } else {
+                            throw MalFormedFileException()
+                        }
+                    }
+                }
+            }
+        }
+        return  messagesList
+    }
+
+
+    inner class LoadMessagesTask(): AsyncTask<String, Void, List<ChatMessage>>(){
+        override fun onPreExecute() {
+            super.onPreExecute()
+            progressBar.visibility = View.VISIBLE
+        }
+
+        override fun doInBackground(vararg args: String?): List<ChatMessage> {
+            // fora da thread principal
+            Thread.sleep(2000)
+            val filename = args[0]
+            return if (filename != null){
+                loadMessages(filename)
+            } else {
+                listOf<ChatMessage>()
+            }
+        }
+
+        override fun onPostExecute(result: List<ChatMessage>?) {
+            super.onPostExecute(result)
+            result?.let {
+                chatViewModel.messages.value = loadMessages(BACKUP_FILENAME)
+            }
+            progressBar.visibility = View.GONE
+        }
+
+    }
 
 }

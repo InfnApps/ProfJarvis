@@ -10,4 +10,8 @@ class ChatMessage(val text: String,
         val sdf = SimpleDateFormat("HH:mm")
         return sdf.format(timestamp)
     }
+
+    override fun toString(): String {
+        return "$text\n$timestamp\n$fromUser"
+    }
 }
