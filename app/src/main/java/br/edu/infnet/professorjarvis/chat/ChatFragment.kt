@@ -51,7 +51,7 @@ class ChatFragment : Fragment() {
         if (chatViewModel.messages.value == null){
             // carrega mensagens do arquivo
             //chatViewModel.messages.value = loadMessages(BACKUP_FILENAME)
-            LoadMessagesTask().execute(BACKUP_FILENAME, "dsd", "dsdsd", "ddds")
+            LoadMessagesTask().execute(BACKUP_FILENAME, "dsdsd", "ddds")
         }
     }
 
@@ -91,8 +91,8 @@ class ChatFragment : Fragment() {
     private fun saveMessages(){
         //fos: FileOutputStream
         val messages = chatViewModel.messages.value
-        if (messages != null && messages.size > 0) {
-            context?.openFileOutput(BACKUP_FILENAME, Context.MODE_PRIVATE).use { fos ->
+        if (messages != null && messages.isNotEmpty()) {
+            context?.openFileOutput(BACKUP_FILENAME, Context.MODE_PRIVATE).use {  fos->
                 fos?.bufferedWriter().use { writer ->
 
                     messages.forEach { msg ->
